@@ -35,19 +35,20 @@ public class CameraFollow : MonoBehaviour
         // Resolution independence solution A
 
         // Getting the bounds for background in WORLD size
-        var backgroundBounds = GameObject.Find("Background").GetComponent<SpriteRenderer>().bounds;
+        var leftBackgroundBounds = GameObject.Find("LeftBackground").GetComponent<SpriteRenderer>().bounds;
+        var rightBackgroundBounds = GameObject.Find("RightBackground").GetComponent<SpriteRenderer>().bounds;
 
         // Get viewable bounds of camera in WORLD size
         var cameraTopLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         var cameraBottomRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
 
         // Set the min and max X for the camera
-        minXandY.x = backgroundBounds.min.x - cameraTopLeft.x;
-        maxXandY.x = backgroundBounds.max.x - cameraBottomRight.x;
+        minXandY.x = leftBackgroundBounds.min.x - cameraTopLeft.x;
+        maxXandY.x = rightBackgroundBounds.max.x - cameraBottomRight.x;
 
         // Set the min and max Y for the camera
-        minXandY.y = backgroundBounds.min.y - cameraTopLeft.y;
-        maxXandY.y = backgroundBounds.max.y - cameraBottomRight.y;
+        minXandY.y = leftBackgroundBounds.min.y - cameraTopLeft.y;
+        maxXandY.y = rightBackgroundBounds.max.y - cameraBottomRight.y;
 
         // End of resolution solution
     }
