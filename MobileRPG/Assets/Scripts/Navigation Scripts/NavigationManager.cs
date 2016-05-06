@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+public struct Route
+{
+    public string routeDescription;
+    public bool canTravel;
+}
 public static class NavigationManager
 {
     // A static list of possible destinations in the game
     // knows everywhere you can travel in the game
-    public static Dictionary<string, string> RouteInformation = new Dictionary<string, string>()
+    public static Dictionary<string, Route> RouteInformation = new Dictionary<string, Route>()
     {
-        {"World", "the big bad world"},
-        {"Cave", "the deep dark cave"},
+        {"World", new Route {routeDescription = "the big bad world", canTravel = false } },
+        {"Cave", new Route {routeDescription = "the deep dark cave", canTravel = true } },
     };
-
+    
     /// <summary>
     /// Used to Interrogate the destination list
     /// </summary>
@@ -20,7 +24,7 @@ public static class NavigationManager
     /// INVENTORY items or other conditions
     public static string GetRouteInformation(string destination)
     {
-        return RouteInformation.ContainsKey(destination) ? RouteInformation[destination] : null;
+        return RouteInformation.ContainsKey(destination) ? RouteInformation[destination].routeDescription : null;
     }
 
     // Will complete later
@@ -31,7 +35,7 @@ public static class NavigationManager
     /// <returns>Return if the player is able to travel to a destination</returns>
     public static bool CanNavigate(string destination)
     {
-        return true;
+        return RouteInformation.ContainsKey(destination) ? RouteInformation[destination].canTravel : false;
     }
 
     /// <summary>
